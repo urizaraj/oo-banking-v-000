@@ -7,4 +7,14 @@ class Transfer
     self.status = 'pending'
     self.amount = amount
   end
+
+  def valid?
+    sender.valid? && receiver.valid?
+  end
+
+  def execute_transaction
+    self.sender.balance -= self.amount
+    self.receiver.balance += self.amount
+    self.status = 'complete'
+  end
 end
